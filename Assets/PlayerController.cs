@@ -7,7 +7,10 @@ using Quaternion = UnityEngine.Quaternion;
 // Uses a quick jump that is NOT affected by how long space is held.
 public class PlayerController : MonoBehaviour
 {
+    // Platform mask when falling, no layer mask when jumping.
+    // ("emptyLayerMask is never assigned" is a lie, don't delete it)
     [SerializeField]private LayerMask platformLayerMask;
+    private LayerMask emptyLayerMask;
     
     // Jump
     public float jumpVel;
@@ -17,7 +20,7 @@ public class PlayerController : MonoBehaviour
     // Movement 
     public float moveSpeed;
     private float movVec;
-    private int isMoving;
+    private int movementDirection;
     
     // Components
     private Rigidbody2D rb;
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
        
     // Fall Death
     public float fallDeathPos;
+    
     
     void Awake()
     {
@@ -34,54 +38,64 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position.y <= fallDeathPos)
-            transform.position = new Vector3(0,0,0);
+        FallDeath();
+        MovementOutput();
+        Gravity();
     }
-
 
     private void Update()
     {
-        Jumping();
-        Movement();
+        JumpingInput();
+        YVelCheck();
+        MovementInput();
         rb.velocity = new Vector2(movVec, rb.velocity.y);
     }
 
-
-    void Jumping()
+    
+    // Activates jumping in FixedUpdate(). Putting jumping in void Update() leads to inconsistent jump heights
+    // due to messing with physics.
+    void JumpingInput()
     {
         if (IsGrounded() && Input.GetKeyDown(KeyCode.W))
-            rb.velocity = Vector2.up * jumpVel;         
-        else if (!IsGrounded())
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMult - 1) * Time.deltaTime;        
+        {        
+            rb.velocity = Vector2.up * jumpVel;
+        }         
     }
 
-    void Movement()
+    void Gravity()
+    {
+        rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMult - 1);
+    }
+
+    void MovementInput()
     {
         if (Input.GetKey(KeyCode.D))
         {
-            if (isMoving != 1)
-            {
-                isMoving = 1;
-                movVec = moveSpeed / 2;
-            }
-
-            movVec = moveSpeed * Time.fixedDeltaTime;
+            movementDirection = 1;
         }     
         else if (Input.GetKey(KeyCode.A))
         {
-            if (isMoving != 2)
-            {
-                isMoving = 1;
-                movVec = moveSpeed / 2;
-            }
-            movVec = -moveSpeed * Time.fixedDeltaTime;
-        }
+            movementDirection = -1;
+        }    
         else
         {
-            isMoving = 0;
-            movVec = 0;
+            movementDirection = 0;
         }
+    }
 
+    void MovementOutput()
+    {
+        movVec = moveSpeed * movementDirection * Time.fixedDeltaTime;
+    }
+
+    void FallDeath()
+    {
+        // Pseudo-Respawn
+        if (transform.position.y <= fallDeathPos)
+        {
+            rb.velocity = Vector2.zero;
+            transform.position = new Vector3(0,0,0);
+        }
     }
 
     private bool IsGrounded()
@@ -98,4 +112,15 @@ public class PlayerController : MonoBehaviour
         return raycastHit.collider != null;
     }
 
+    void YVelCheck()
+    {
+        if (rb.velocity.y <= 0)
+        {
+            platformLayerMask = 7 << 8;
+        }
+        else
+        {
+            platformLayerMask = emptyLayerMask;
+        }
+    }
 }
