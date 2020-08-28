@@ -13,37 +13,43 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/PlayerController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="667">
-              <caret line="122" column="34" lean-forward="true" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="34" />
+            <state relative-caret-position="450">
+              <caret line="58" column="117" selection-start-line="58" selection-start-column="117" selection-end-line="58" selection-end-column="117" />
               <folding>
-                <marker date="1598641690855" expanded="true" signature="95:501" ph="/* NOTE: The jump + movement input and velocity are kept separate with input in Update() and velocity in ... */" />
-                <marker date="1598641690855" expanded="true" signature="508:580" ph="..." />
-                <marker date="1598641690855" expanded="true" signature="627:3496" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="1363:1472" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="1504:1582" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="1609:1749" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="1859:2013" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="1922:1998" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2033:2124" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2150:2420" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2193:2245" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2292:2345" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2362:2414" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2447:2526" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2618:2793" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2674:2787" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2824:3214" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="2989:3164" ph="/* if (raycastHit.collider != null) ... */" />
-                <marker date="1598641690855" expanded="true" signature="3220:3288" ph="/* yVel &lt; 0: Platform layer mask. ... */" />
-                <marker date="1598641690855" expanded="true" signature="3309:3494" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="3347:3407" ph="{...}" />
-                <marker date="1598641690855" expanded="true" signature="3420:3488" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="95:501" ph="/* NOTE: The jump + movement input and velocity are kept separate with input in Update() and velocity in ... */" />
+                <marker date="1598644335953" expanded="true" signature="508:580" ph="..." />
+                <marker date="1598644335953" expanded="true" signature="627:2970" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="1159:1268" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="1300:1378" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="1405:1547" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="1553:1751" ph="/* Gives player upward velocity only once, so it can be used in Update() safely. ... */" />
+                <marker date="1598644335953" expanded="true" signature="1775:1951" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="1860:1936" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="1971:2062" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="2088:2358" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="2131:2183" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="2230:2283" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="2300:2352" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="2385:2464" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="2556:2731" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="2612:2725" ph="{...}" />
+                <marker date="1598644335953" expanded="true" signature="2762:2968" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>movementDirection</find>
+      <find>rayColor</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>inputDirection</replace>
+      <replace>castColor</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,7 +64,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-7" />
     <option name="width" value="1294" />
     <option name="height" value="1407" />
@@ -123,12 +129,12 @@
       <option name="presentableId" value="Default" />
       <updated>1598636121249</updated>
       <workItem from="1598636122719" duration="9000" />
-      <workItem from="1598636133569" duration="5507000" />
+      <workItem from="1598636133569" duration="8130000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5516000" />
+    <option name="totallyTimeSpent" value="8139000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -140,7 +146,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1294" height="1407" extended-state="0" />
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25364667" />
@@ -189,33 +195,39 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/TestCharGrounded/Scripts/GroundCheck.cs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/TestCharGrounded/Scripts/Player.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/PlayerController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="667">
-          <caret line="122" column="34" lean-forward="true" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="34" />
+        <state relative-caret-position="450">
+          <caret line="58" column="117" selection-start-line="58" selection-start-column="117" selection-end-line="58" selection-end-column="117" />
           <folding>
-            <marker date="1598641690855" expanded="true" signature="95:501" ph="/* NOTE: The jump + movement input and velocity are kept separate with input in Update() and velocity in ... */" />
-            <marker date="1598641690855" expanded="true" signature="508:580" ph="..." />
-            <marker date="1598641690855" expanded="true" signature="627:3496" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="1363:1472" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="1504:1582" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="1609:1749" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="1859:2013" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="1922:1998" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2033:2124" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2150:2420" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2193:2245" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2292:2345" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2362:2414" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2447:2526" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2618:2793" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2674:2787" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2824:3214" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="2989:3164" ph="/* if (raycastHit.collider != null) ... */" />
-            <marker date="1598641690855" expanded="true" signature="3220:3288" ph="/* yVel &lt; 0: Platform layer mask. ... */" />
-            <marker date="1598641690855" expanded="true" signature="3309:3494" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="3347:3407" ph="{...}" />
-            <marker date="1598641690855" expanded="true" signature="3420:3488" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="95:501" ph="/* NOTE: The jump + movement input and velocity are kept separate with input in Update() and velocity in ... */" />
+            <marker date="1598644335953" expanded="true" signature="508:580" ph="..." />
+            <marker date="1598644335953" expanded="true" signature="627:2970" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="1159:1268" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="1300:1378" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="1405:1547" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="1553:1751" ph="/* Gives player upward velocity only once, so it can be used in Update() safely. ... */" />
+            <marker date="1598644335953" expanded="true" signature="1775:1951" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="1860:1936" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="1971:2062" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="2088:2358" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="2131:2183" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="2230:2283" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="2300:2352" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="2385:2464" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="2556:2731" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="2612:2725" ph="{...}" />
+            <marker date="1598644335953" expanded="true" signature="2762:2968" ph="{...}" />
           </folding>
         </state>
       </provider>

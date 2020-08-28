@@ -12,10 +12,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Platform mask when falling, no layer mask when jumping.
     [SerializeField]private LayerMask platformLayerMask;
-    // "emptyLayerMask is never assigned" is a lie, do not delete it or it borks the one-way platforms
-    private LayerMask emptyLayerMask;
     
     // Jump
     public float jumpVel;
@@ -59,9 +56,10 @@ public class PlayerController : MonoBehaviour
     }
 
     // Gives player upward velocity only once, so it can be used in Update() safely.
+    // Can only jump input when velocity <= 0 so player cannot jump while they're in the middle of one-way platforms.
     void JumpingInput()
     {
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.W))
+        if (IsGrounded() && Input.GetKey(KeyCode.W) && rb.velocity.y <= 0)
         {        
             rb.velocity = Vector2.up * jumpVel;
         }         
@@ -105,31 +103,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f,Vector2.down, .7f, platformLayerMask);
-        /*
-        if (raycastHit.collider != null)
-        {
-            Debug.Log("Grounded");
-        }
-        else
-        {
-            Debug.Log("Midair");
-        }
-        */
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f,Vector2.down, .55f, platformLayerMask);
         return raycastHit.collider != null;
-    }
-
-    // yVel < 0: Platform layer mask.
-    // yVel > 0: Empty layer mask.
-    void YVelCheck()
-    {
-        if (rb.velocity.y <= 0)
-        {
-            platformLayerMask = 7 << 8;
-        }
-        else
-        {
-            platformLayerMask = emptyLayerMask;
-        }
     }
 }
