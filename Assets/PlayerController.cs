@@ -1,31 +1,38 @@
-﻿using System;
+﻿// MAIN MECHANIC: A quick and consistent jump that is NOT affected by how long space is held.
+
+/*                                            *** NOTE ***
+ * The jump + movement input and velocity are kept separate, with input in Update() and velocity in FixedUpdate().
+ * The reason for this is because putting velocity changes in Update() can cause inconsistencies due to physics updates.
+ 
+ * I just found out about this after 2 hours of debugging, and I DO NOT want you to have the same problem.
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Quaternion = UnityEngine.Quaternion;
 
-// Uses a quick jump that is NOT affected by how long space is held.
 public class PlayerController : MonoBehaviour
 {
     // Platform mask when falling, no layer mask when jumping.
-    // ("emptyLayerMask is never assigned" is a lie, don't delete it)
     [SerializeField]private LayerMask platformLayerMask;
+    // "emptyLayerMask is never assigned" is a lie, do not delete it or it borks the one-way platforms
     private LayerMask emptyLayerMask;
     
     // Jump
     public float jumpVel;
-    public float lowJumpMult = 2f;
+    public float gravityWeight = 2f;
     private Vector2 jumpVec;
     
     // Movement 
     public float moveSpeed;
     private float movVec;
-    private int movementDirection;
+    
+    // Multiplies horizontal velocity to determine direction in FixedUpdate().
+    private int inputDirection;
     
     // Components
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider2D;
-       
+   
     // Fall Death
     public float fallDeathPos;
     
@@ -46,14 +53,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         JumpingInput();
-        YVelCheck();
+        //YVelCheck();
         MovementInput();
         rb.velocity = new Vector2(movVec, rb.velocity.y);
     }
 
-    
-    // Activates jumping in FixedUpdate(). Putting jumping in void Update() leads to inconsistent jump heights
-    // due to messing with physics.
+    // Gives player upward velocity only once, so it can be used in Update() safely.
     void JumpingInput()
     {
         if (IsGrounded() && Input.GetKeyDown(KeyCode.W))
@@ -64,33 +69,33 @@ public class PlayerController : MonoBehaviour
 
     void Gravity()
     {
-        rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMult - 1);
+        rb.velocity += Vector2.up * Physics2D.gravity.y * (gravityWeight - 1);
     }
 
     void MovementInput()
     {
         if (Input.GetKey(KeyCode.D))
         {
-            movementDirection = 1;
+            inputDirection = 1;
         }     
         else if (Input.GetKey(KeyCode.A))
         {
-            movementDirection = -1;
+            inputDirection = -1;
         }    
         else
         {
-            movementDirection = 0;
+            inputDirection = 0;
         }
     }
 
     void MovementOutput()
     {
-        movVec = moveSpeed * movementDirection * Time.fixedDeltaTime;
+        movVec = moveSpeed * inputDirection * Time.fixedDeltaTime;
     }
-
+    
+    // Pseudo-respawns player after falling to determined y value
     void FallDeath()
     {
-        // Pseudo-Respawn
         if (transform.position.y <= fallDeathPos)
         {
             rb.velocity = Vector2.zero;
@@ -101,6 +106,7 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f,Vector2.down, .7f, platformLayerMask);
+        /*
         if (raycastHit.collider != null)
         {
             Debug.Log("Grounded");
@@ -109,9 +115,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Midair");
         }
+        */
         return raycastHit.collider != null;
     }
 
+    // yVel < 0: Platform layer mask.
+    // yVel > 0: Empty layer mask.
     void YVelCheck()
     {
         if (rb.velocity.y <= 0)

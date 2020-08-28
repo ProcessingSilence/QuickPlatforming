@@ -13,32 +13,31 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/PlayerController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+            <state relative-caret-position="667">
+              <caret line="122" column="34" lean-forward="true" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="34" />
               <folding>
-                <marker date="1598640077771" expanded="false" signature="6:135" ph="..." />
-                <marker date="1598640077771" expanded="true" signature="251:2946" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="258:386" ph="/* Platform mask when falling, no layer mask when jumping. ... */" />
-                <marker date="1598640077771" expanded="true" signature="875:984" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1016:1094" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1121:1261" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1272:1414" ph="/* Activates jumping in FixedUpdate(). Putting jumping in void Update() leads to inconsistent jump heights ... */" />
-                <marker date="1598640077771" expanded="true" signature="1438:1592" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1501:1577" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1612:1701" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1727:2006" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1770:1825" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1872:1928" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="1945:2000" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2033:2115" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2137:2338" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2219:2332" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2369:2737" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2566:2621" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2634:2687" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2759:2944" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2797:2857" ph="{...}" />
-                <marker date="1598640077771" expanded="true" signature="2870:2938" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="95:501" ph="/* NOTE: The jump + movement input and velocity are kept separate with input in Update() and velocity in ... */" />
+                <marker date="1598641690855" expanded="true" signature="508:580" ph="..." />
+                <marker date="1598641690855" expanded="true" signature="627:3496" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="1363:1472" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="1504:1582" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="1609:1749" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="1859:2013" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="1922:1998" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2033:2124" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2150:2420" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2193:2245" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2292:2345" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2362:2414" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2447:2526" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2618:2793" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2674:2787" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2824:3214" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="2989:3164" ph="/* if (raycastHit.collider != null) ... */" />
+                <marker date="1598641690855" expanded="true" signature="3220:3288" ph="/* yVel &lt; 0: Platform layer mask. ... */" />
+                <marker date="1598641690855" expanded="true" signature="3309:3494" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="3347:3407" ph="{...}" />
+                <marker date="1598641690855" expanded="true" signature="3420:3488" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -59,7 +58,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-7" />
     <option name="width" value="1294" />
     <option name="height" value="1407" />
@@ -124,12 +123,12 @@
       <option name="presentableId" value="Default" />
       <updated>1598636121249</updated>
       <workItem from="1598636122719" duration="9000" />
-      <workItem from="1598636133569" duration="3909000" />
+      <workItem from="1598636133569" duration="5507000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3918000" />
+    <option name="totallyTimeSpent" value="5516000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -192,32 +191,31 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Assets/PlayerController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        <state relative-caret-position="667">
+          <caret line="122" column="34" lean-forward="true" selection-start-line="122" selection-start-column="34" selection-end-line="122" selection-end-column="34" />
           <folding>
-            <marker date="1598640077771" expanded="false" signature="6:135" ph="..." />
-            <marker date="1598640077771" expanded="true" signature="251:2946" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="258:386" ph="/* Platform mask when falling, no layer mask when jumping. ... */" />
-            <marker date="1598640077771" expanded="true" signature="875:984" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1016:1094" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1121:1261" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1272:1414" ph="/* Activates jumping in FixedUpdate(). Putting jumping in void Update() leads to inconsistent jump heights ... */" />
-            <marker date="1598640077771" expanded="true" signature="1438:1592" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1501:1577" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1612:1701" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1727:2006" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1770:1825" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1872:1928" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="1945:2000" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2033:2115" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2137:2338" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2219:2332" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2369:2737" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2566:2621" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2634:2687" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2759:2944" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2797:2857" ph="{...}" />
-            <marker date="1598640077771" expanded="true" signature="2870:2938" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="95:501" ph="/* NOTE: The jump + movement input and velocity are kept separate with input in Update() and velocity in ... */" />
+            <marker date="1598641690855" expanded="true" signature="508:580" ph="..." />
+            <marker date="1598641690855" expanded="true" signature="627:3496" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="1363:1472" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="1504:1582" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="1609:1749" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="1859:2013" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="1922:1998" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2033:2124" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2150:2420" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2193:2245" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2292:2345" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2362:2414" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2447:2526" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2618:2793" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2674:2787" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2824:3214" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="2989:3164" ph="/* if (raycastHit.collider != null) ... */" />
+            <marker date="1598641690855" expanded="true" signature="3220:3288" ph="/* yVel &lt; 0: Platform layer mask. ... */" />
+            <marker date="1598641690855" expanded="true" signature="3309:3494" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="3347:3407" ph="{...}" />
+            <marker date="1598641690855" expanded="true" signature="3420:3488" ph="{...}" />
           </folding>
         </state>
       </provider>
