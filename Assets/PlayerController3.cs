@@ -1,11 +1,5 @@
-﻿// MAIN MECHANIC: A quick and consistent jump that is NOT affected by how long space is held.
+﻿// MAIN MECHANIC: A quick and consistent jump (plus multi-jump) that is NOT affected by how long space is held.
 
-/*                                            *** NOTE ***
- * The jump + movement input and velocity are kept separate, with input in Update() and velocity in FixedUpdate().
- * The reason for this is because putting velocity changes in Update() can cause inconsistencies due to physics updates.
- 
- * I just found out about this after 2 hours of debugging, and I DO NOT want you to have the same problem.
-*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +10,14 @@ public class PlayerController3 : MonoBehaviour
     
     // Jump
     public float jumpVel;
-    public float gravityWeight = 2f;
     private Vector2 jumpVec;
         // Tells how many midair jumps are left. Edit this as much as you want.
-    public int multiJumpLimit;
-    public int currentJumpsLeft;
+    public int multiJumpLimit, currentJumpsLeft;
     public float maxJumpHeight;
     private Vector2 currentJumpPosition;
-    private bool numeratorRunning;
     private int iJumped;
+    // When pressing jump input
+    float jumpPressedRemember, jumpPressedRememberTime = 0.2f;
     
     // Movement 
     public float moveSpeed;
@@ -51,8 +44,6 @@ public class PlayerController3 : MonoBehaviour
     private void FixedUpdate()
     {
         FallDeath();
-        MovementOutput();
-
         FallVelocityCheck();
     }
 
@@ -60,16 +51,21 @@ public class PlayerController3 : MonoBehaviour
     {
         JumpingInput();
         Gravity();
-        MovementInput();
-        rb.velocity = new Vector2(movVec, rb.velocity.y);
+        rb.velocity = new Vector2(HorizontalMovement(), rb.velocity.y);
     }
 
     // Gives player upward velocity only once, so it can be used in Update() safely.
     // Can only jump input when velocity <= 0 so player cannot jump while they're in the middle of one-way platforms.
     void JumpingInput()
     {
+        jumpPressedRemember -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            jumpPressedRemember = jumpPressedRememberTime;
+        }
+        
         // Uses "GetKey" so that the jumping is not sensitive
-        if ((IsGrounded() && Input.GetKey(KeyCode.W) && rb.velocity.y <= 0))
+        if ((IsGrounded() && rb.velocity.y <= 0 && (jumpPressedRemember > 0)))
         {
             iJumped = 1;
             currentJumpPosition = new Vector2(transform.position.x, transform.position.y + maxJumpHeight);
@@ -77,13 +73,14 @@ public class PlayerController3 : MonoBehaviour
             currentJumpsLeft = multiJumpLimit;
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && !IsGrounded() && currentJumpsLeft > 0)
+        if (!IsGrounded() && currentJumpsLeft > 0 && Input.GetKeyDown(KeyCode.W))
         {
             iJumped = 1;
             currentJumpPosition = new Vector2(transform.position.x, transform.position.y + maxJumpHeight);
             currentJumpsLeft -= 1;
             rb.velocity = Vector2.up * jumpVel;
         }
+
         if (IsGrounded() && iJumped != 1)
         {
             iJumped = 0;
@@ -92,35 +89,12 @@ public class PlayerController3 : MonoBehaviour
 
     void Gravity()
     {
-        //rb.velocity += Vector2.up * Physics2D.gravity.y * (gravityWeight - 1);
         if (!IsGrounded() && iJumped == 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, -jumpVel);
         }
         
     }
-
-    void MovementInput()
-    {
-        if (Input.GetKey(KeyCode.D))
-        {
-            inputDirection = 1;
-        }     
-        else if (Input.GetKey(KeyCode.A))
-        {
-            inputDirection = -1;
-        }    
-        else
-        {
-            inputDirection = 0;
-        }
-    }
-
-    void MovementOutput()
-    {
-        movVec = moveSpeed * inputDirection * Time.fixedDeltaTime;
-    }
-    
     // Pseudo-respawns player after falling to determined y value
     void FallDeath()
     {
@@ -143,10 +117,36 @@ public class PlayerController3 : MonoBehaviour
             }
         }
     }
+    
+    private float HorizontalMovement()
+    {
+        if (Input.GetKey(KeyCode.D))
+        {
+            inputDirection = 1;
+        }     
+        else if (Input.GetKey(KeyCode.A))
+        {
+            inputDirection = -1;
+        }    
+        else
+        {
+            inputDirection = 0;
+        }
+        return moveSpeed * inputDirection * Time.fixedDeltaTime;
+    }
 
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f,Vector2.down, .50f, platformLayerMask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f,Vector2.down, .05f, platformLayerMask);
         return raycastHit.collider != null;
+    }
+
+    // Prevents player from auto-jumping after touching the one-way platforms
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("OneWayPlatform") && rb.velocity.y > 0)
+        {
+            jumpPressedRemember = 0;
+        }
     }
 }

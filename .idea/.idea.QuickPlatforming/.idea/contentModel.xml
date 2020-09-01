@@ -6,6 +6,7 @@
     <e p="C:\Users\Liam\Documents\GitHub\QuickPlatforming" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="CanvasObjs.cs" t="Include" />
         <e p="PlayerController.cs" t="Include" />
         <e p="PlayerController2.cs" t="Include" />
         <e p="PlayerController3.cs" t="Include" />

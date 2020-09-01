@@ -1,11 +1,4 @@
-﻿// MAIN MECHANIC: A quick and consistent jump that is NOT affected by how long space is held.
-
-/*                                            *** NOTE ***
- * The jump + movement input and velocity are kept separate, with input in Update() and velocity in FixedUpdate().
- * The reason for this is because putting velocity changes in Update() can cause inconsistencies due to physics updates.
- 
- * I just found out about this after 2 hours of debugging, and I DO NOT want you to have the same problem.
-*/
+﻿// MAIN MECHANIC: A quick and consistent jump (plus multi-jump) that is NOT affected by how long space is held.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +9,6 @@ public class PlayerController2 : MonoBehaviour
     
     // Jump
     public float jumpVel;
-    public float gravityWeight = 2f;
     private Vector2 jumpVec;
         // Tells how many midair jumps are left. Edit this as much as you want.
     public int multiJumpLimit;
