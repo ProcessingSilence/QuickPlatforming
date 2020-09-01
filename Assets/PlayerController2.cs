@@ -25,6 +25,8 @@ public class PlayerController2 : MonoBehaviour
     private Vector2 currentJumpPosition;
     private bool numeratorRunning;
     private int iJumped;
+    float fJumpPressedRemember = 0;
+    float fJumpPressedRememberTime = 0.2f;
     
     // Movement 
     public float moveSpeed;
@@ -68,8 +70,14 @@ public class PlayerController2 : MonoBehaviour
     // Can only jump input when velocity <= 0 so player cannot jump while they're in the middle of one-way platforms.
     void JumpingInput()
     {
+        fJumpPressedRemember -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            fJumpPressedRemember = fJumpPressedRememberTime;
+        }
+        
         // Uses "GetKey" so that the jumping is not sensitive
-        if ((IsGrounded() && Input.GetKey(KeyCode.W) && rb.velocity.y <= 0))
+        if ((IsGrounded() && rb.velocity.y <= 0 && (fJumpPressedRemember > 0)))
         {
             iJumped = 1;
             currentJumpPosition = new Vector2(transform.position.x, transform.position.y + maxJumpHeight);
@@ -77,13 +85,15 @@ public class PlayerController2 : MonoBehaviour
             currentJumpsLeft = multiJumpLimit;
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && !IsGrounded() && currentJumpsLeft > 0)
+        if (!IsGrounded() && currentJumpsLeft > 0 && Input.GetKeyDown(KeyCode.W))
         {
             iJumped = 1;
             currentJumpPosition = new Vector2(transform.position.x, transform.position.y + maxJumpHeight);
             currentJumpsLeft -= 1;
             rb.velocity = Vector2.up * jumpVel;
         }
+
+
         if (IsGrounded() && iJumped != 1)
         {
             iJumped = 0;
@@ -146,7 +156,15 @@ public class PlayerController2 : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f,Vector2.down, .50f, platformLayerMask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f,Vector2.down, .2f, platformLayerMask);
         return raycastHit.collider != null;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("OneWayPlatform"))
+        {
+            fJumpPressedRemember = 0;
+        }
     }
 }
