@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
     [SerializeField]private LayerMask platformLayerMask;
     
@@ -19,8 +19,12 @@ public class PlayerController : MonoBehaviour
     public float gravityWeight = 2f;
     private Vector2 jumpVec;
         // Tells how many midair jumps are left. Edit this as much as you want.
-    public int multiJumpLeft;
+    public int multiJumpLimit;
     public int currentJumpsLeft;
+    public float maxJumpHeight;
+    private Vector2 currentJumpPosition;
+    private bool numeratorRunning;
+    private int iJumped;
     
     // Movement 
     public float moveSpeed;
@@ -41,20 +45,21 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        currentJumpsLeft = multiJumpLeft;
+        currentJumpsLeft = multiJumpLimit;
     }
 
     private void FixedUpdate()
     {
         FallDeath();
         MovementOutput();
-        Gravity();
+
+        FallVelocityCheck();
     }
 
     private void Update()
     {
         JumpingInput();
-        //YVelCheck();
+        Gravity();
         MovementInput();
         rb.velocity = new Vector2(movVec, rb.velocity.y);
     }
@@ -65,21 +70,34 @@ public class PlayerController : MonoBehaviour
     {
         // Uses "GetKey" so that the jumping is not sensitive
         if ((IsGrounded() && Input.GetKey(KeyCode.W) && rb.velocity.y <= 0))
-        {        
+        {
+            iJumped = 1;
+            currentJumpPosition = new Vector2(transform.position.x, transform.position.y + maxJumpHeight);
             rb.velocity = Vector2.up * jumpVel;
-            currentJumpsLeft = multiJumpLeft;
+            currentJumpsLeft = multiJumpLimit;
         }
 
         if (Input.GetKeyDown(KeyCode.W) && !IsGrounded() && currentJumpsLeft > 0)
         {
+            iJumped = 1;
+            currentJumpPosition = new Vector2(transform.position.x, transform.position.y + maxJumpHeight);
             currentJumpsLeft -= 1;
             rb.velocity = Vector2.up * jumpVel;
+        }
+        if (IsGrounded() && iJumped != 1)
+        {
+            iJumped = 0;
         }
     }
 
     void Gravity()
     {
-        rb.velocity += Vector2.up * Physics2D.gravity.y * (gravityWeight - 1);
+        //rb.velocity += Vector2.up * Physics2D.gravity.y * (gravityWeight - 1);
+        if (!IsGrounded() && iJumped == 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -jumpVel);
+        }
+        
     }
 
     void MovementInput()
@@ -108,8 +126,21 @@ public class PlayerController : MonoBehaviour
     {
         if (transform.position.y <= fallDeathPos)
         {
-            rb.velocity = Vector2.zero;
+            rb.velocity = new Vector2(rb.velocity.x, 0);
             transform.position = new Vector3(0,0,0);
+        }
+    }
+
+    void FallVelocityCheck()
+    {
+        if (!IsGrounded())
+        {
+            if (transform.position.y > currentJumpPosition.y && rb.velocity.y > 0)
+            {
+                iJumped = 2;
+                var tempVel = rb.velocity;
+                rb.velocity = new Vector2(tempVel.x, -jumpVel);
+            }
         }
     }
 
