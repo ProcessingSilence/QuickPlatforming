@@ -18,11 +18,12 @@ public class PlayerController3 : MonoBehaviour
         public float maxJumpHeight;
         
         // Gets y position of player when they are no longer grounded.
-        // If the player's y-position >= yPosLimit, they will start falling
+            // If the player's y-position >= yPosLimit, they will start falling
         private float yPosLimit;
         
-        // 0- Haven't jumped,
-        // Have jumped: 1-  Did not touch height limit. 2- Touched height limit, now I'm falling down.
+        // Flag that determines what happens midair when not grounded.
+            // 0- Currently falling
+            // Have jumped: 1-  Going up, did not touch height limit. 2- Touched height limit, switch to 0.
         private int iJumpedFlag;
         
         // When pressing jump input, waits [input time] before seeing if player lands on ground, if the player lands on
@@ -74,26 +75,23 @@ public class PlayerController3 : MonoBehaviour
     void JumpingInput()
     {
         jumpPressedPeriodCurrent -= Time.deltaTime;
+        
+        // Reset timer on jump.
         if (Input.GetKeyDown(KeyCode.W))
         {
             jumpPressedPeriodCurrent = jumpPressedPeriodTime;
         }
-        
-        // Uses "GetKey" so that the jumping is not sensitive
-        if ((IsGrounded() && rb.velocity.y <= 0 && (jumpPressedPeriodCurrent > 0)))
+
+        if ((IsGrounded() && rb.velocity.y <= 0 && jumpPressedPeriodCurrent > 0))
         {
-            iJumpedFlag = 1;
-            yPosLimit = transform.position.y + maxJumpHeight;
-            rb.velocity = Vector2.up * jumpFall_vel;
+            Jump();
             currentJumpsLeft = multiJumpLimit;
         }
 
         if (!IsGrounded() && currentJumpsLeft > 0 && Input.GetKeyDown(KeyCode.W))
         {
-            iJumpedFlag = 1;
-            yPosLimit = transform.position.y + maxJumpHeight;
+            Jump();
             currentJumpsLeft -= 1;
-            rb.velocity = Vector2.up * jumpFall_vel;
         }
 
         if (IsGrounded() && iJumpedFlag > 1)
@@ -131,7 +129,14 @@ public class PlayerController3 : MonoBehaviour
             }
         }
     }
-    
+
+    void Jump()
+    {
+        iJumpedFlag = 1;
+        yPosLimit = transform.position.y + maxJumpHeight;
+        rb.velocity = Vector2.up * jumpFall_vel;
+    }
+
     private float HorizontalMovement()
     {
         if (Input.GetKey(KeyCode.D))
