@@ -9,29 +9,44 @@ public class PlayerController3 : MonoBehaviour
     [SerializeField]private LayerMask platformLayerMask;
     
     // Jump
-    public float jumpVel;
-    private Vector2 jumpVec;
-        // Tells how many midair jumps are left. Edit this as much as you want.
-    public int multiJumpLimit, currentJumpsLeft;
-    public float maxJumpHeight;
-    private Vector2 currentJumpPosition;
-    private int iJumped;
-    // When pressing jump input
-    float jumpPressedRemember, jumpPressedRememberTime = 0.2f;
+        public float jumpFall_vel;
+        
+        // How many midair jumps are allowed, set to 0 to disable.
+        public int multiJumpLimit;
+        public int currentJumpsLeft;
+        
+        public float maxJumpHeight;
+        
+        // Gets y position of player when they are no longer grounded.
+        // If the player's y-position >= yPosLimit, they will start falling
+        private float yPosLimit;
+        
+        // 0- Haven't jumped,
+        // Have jumped: 1-  Did not touch height limit. 2- Touched height limit, now I'm falling down.
+        private int iJumpedFlag;
+        
+        // When pressing jump input, waits [input time] before seeing if player lands on ground, if the player lands on
+        // the ground within that time period, they will automatically jump.
+        private float jumpPressedPeriodCurrent;
+        private float jumpPressedPeriodTime = 0.1f;
     
+   
     // Movement 
-    public float moveSpeed;
-    private float movVec;
+        public float moveSpeed;
+        private float movVec;   
+        
+        // Multiplies horizontal velocity to determine direction in FixedUpdate().
+        private int inputDirection;
     
-    // Multiplies horizontal velocity to determine direction in FixedUpdate().
-    private int inputDirection;
+    
+    // Fall Death
+        public float fallDeathPos;
+    
     
     // Components
-    private Rigidbody2D rb;
-    private BoxCollider2D boxCollider2D;
+        private Rigidbody2D rb;
+        private BoxCollider2D boxCollider2D;
    
-    // Fall Death
-    public float fallDeathPos;
     
     
     void Awake()
@@ -58,40 +73,40 @@ public class PlayerController3 : MonoBehaviour
     // Can only jump input when velocity <= 0 so player cannot jump while they're in the middle of one-way platforms.
     void JumpingInput()
     {
-        jumpPressedRemember -= Time.deltaTime;
+        jumpPressedPeriodCurrent -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.W))
         {
-            jumpPressedRemember = jumpPressedRememberTime;
+            jumpPressedPeriodCurrent = jumpPressedPeriodTime;
         }
         
         // Uses "GetKey" so that the jumping is not sensitive
-        if ((IsGrounded() && rb.velocity.y <= 0 && (jumpPressedRemember > 0)))
+        if ((IsGrounded() && rb.velocity.y <= 0 && (jumpPressedPeriodCurrent > 0)))
         {
-            iJumped = 1;
-            currentJumpPosition = new Vector2(transform.position.x, transform.position.y + maxJumpHeight);
-            rb.velocity = Vector2.up * jumpVel;
+            iJumpedFlag = 1;
+            yPosLimit = transform.position.y + maxJumpHeight;
+            rb.velocity = Vector2.up * jumpFall_vel;
             currentJumpsLeft = multiJumpLimit;
         }
 
         if (!IsGrounded() && currentJumpsLeft > 0 && Input.GetKeyDown(KeyCode.W))
         {
-            iJumped = 1;
-            currentJumpPosition = new Vector2(transform.position.x, transform.position.y + maxJumpHeight);
+            iJumpedFlag = 1;
+            yPosLimit = transform.position.y + maxJumpHeight;
             currentJumpsLeft -= 1;
-            rb.velocity = Vector2.up * jumpVel;
+            rb.velocity = Vector2.up * jumpFall_vel;
         }
 
-        if (IsGrounded() && iJumped != 1)
+        if (IsGrounded() && iJumpedFlag > 1)
         {
-            iJumped = 0;
+            iJumpedFlag = 0;
         }
     }
 
     void Gravity()
     {
-        if (!IsGrounded() && iJumped == 0)
+        if (!IsGrounded() && iJumpedFlag == 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -jumpVel);
+            rb.velocity = new Vector2(rb.velocity.x, -jumpFall_vel);
         }
         
     }
@@ -109,11 +124,10 @@ public class PlayerController3 : MonoBehaviour
     {
         if (!IsGrounded())
         {
-            if (transform.position.y > currentJumpPosition.y && rb.velocity.y > 0)
+            if (transform.position.y > yPosLimit && rb.velocity.y > 0)
             {
-                iJumped = 2;
-                var tempVel = rb.velocity;
-                rb.velocity = new Vector2(tempVel.x, -jumpVel);
+                iJumpedFlag = 2;
+                rb.velocity = new Vector2(rb.velocity.x, -jumpFall_vel);
             }
         }
     }
@@ -141,12 +155,12 @@ public class PlayerController3 : MonoBehaviour
         return raycastHit.collider != null;
     }
 
-    // Prevents player from auto-jumping after touching the one-way platforms
+    // Prevents player from auto-jumping after touching the one-way platforms while velocity is upwards.
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("OneWayPlatform") && rb.velocity.y > 0)
         {
-            jumpPressedRemember = 0;
+            jumpPressedPeriodCurrent = 0;
         }
     }
 }
