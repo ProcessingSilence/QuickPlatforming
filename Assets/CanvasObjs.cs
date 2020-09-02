@@ -5,22 +5,58 @@ using UnityEngine.UI;
 
 public class CanvasObjs : MonoBehaviour
 {
-    public PlayerController2 myPlayerController;
+    public PlayerController my_PlayerController_script;
 
     public Text midairJumps;
     public Slider midairSlider;
+    public Text jumpsLeft;
     
     public Text jumpHeightLimit;
-    public Slider jumpSlider;
+    public Slider jumpHeightLimitSlider;
     // Start is called before the first frame update
     void Start()
     {
+        // Midair jumps
+        SetSliderAndText(midairSlider,0,4,true, my_PlayerController_script.multiJumpLimit, 
+            midairJumps, "Midair jumps: " + midairSlider.value);
+        midairSlider.onValueChanged.AddListener(delegate{ValueChangeCheck();});
         
+        // Jump height limit
+        SetSliderAndText(jumpHeightLimitSlider,1,5,false, my_PlayerController_script.maxJumpHeight, 
+            jumpHeightLimit, "Jump height limit: " + jumpHeightLimitSlider.value);
+        jumpHeightLimitSlider.onValueChanged.AddListener(delegate{ValueChangeCheck();});
+        ValueChangeCheck();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Reset jump limit value in text upon landing; does NOT happen in the script until player jumps from the ground.
+        if (my_PlayerController_script.currentJumpsLeft == 0 && my_PlayerController_script.multiJumpLimit > 0)
+        {
+            jumpsLeft.text = "Midair jumps left: 0, jump again to reset";
+        }
+        else
+        {
+            jumpsLeft.text = "Midair jumps left: " + my_PlayerController_script.currentJumpsLeft;
+        }
+
+    }
+
+    public void ValueChangeCheck()
+    {
+        my_PlayerController_script.multiJumpLimit = (int) midairSlider.value;
+        midairJumps.text = "Midair jumps: " + midairSlider.value;
         
+        jumpHeightLimitSlider.value = my_PlayerController_script.maxJumpHeight = Mathf.Round(jumpHeightLimitSlider.value * 10f) * 0.1f;
+        jumpHeightLimit.text = "Jump height limit: " + jumpHeightLimitSlider.value;
+    }
+    
+    void SetSliderAndText(Slider currentSlider, float min, float max, bool wholeNumber, float currentVal, Text myText, string textValue)
+    {
+        currentSlider.minValue = min;
+        currentSlider.maxValue = max;
+        currentSlider.wholeNumbers = wholeNumber;
+        currentSlider.value = currentVal;
+        myText.text = textValue;
     }
 }

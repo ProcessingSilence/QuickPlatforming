@@ -8,8 +8,6 @@
       <e p="Assets" t="Include">
         <e p="CanvasObjs.cs" t="Include" />
         <e p="PlayerController.cs" t="Include" />
-        <e p="PlayerController2.cs" t="Include" />
-        <e p="PlayerController3.cs" t="Include" />
       </e>
       <e p="Library" t="ExcludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
