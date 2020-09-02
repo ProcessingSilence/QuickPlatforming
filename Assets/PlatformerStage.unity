@@ -1504,7 +1504,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Jump again to reset
+  m_Text: Ground-jump to reset
 --- !u!222 &1660356633
 CanvasRenderer:
   m_ObjectHideFlags: 0
