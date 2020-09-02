@@ -10,7 +10,6 @@ public class DebugPlayer: MonoBehaviour
     public Text midairJumps;
     public Slider midairSlider;
     public Text jumpsLeft;
-    public Text jumpToReset;
     
     public Text jumpHeightLimit;
     public Slider jumpHeightLimitSlider;
@@ -27,15 +26,11 @@ public class DebugPlayer: MonoBehaviour
             jumpHeightLimit, "Jump height limit: " + jumpHeightLimitSlider.value);
         jumpHeightLimitSlider.onValueChanged.AddListener(delegate{ValueChangeCheck();});
         ValueChangeCheck();
-
-        jumpToReset.enabled = false;
     }
 
     void Update()
     {
-            jumpsLeft.text = "Midair jumps left: " + my_PlayerController_script.currentJumpsLeft;
-            jumpToReset.enabled = my_PlayerController_script.currentJumpsLeft == 0 &&
-                                  my_PlayerController_script.multiJumpLimit > 0;     
+        jumpsLeft.text = "Midair jumps left: " + my_PlayerController_script.currentJumpsLeft;
     }
 
     public void ValueChangeCheck()

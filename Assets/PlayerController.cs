@@ -82,10 +82,13 @@ public class PlayerController : MonoBehaviour
             jumpPressedPeriodCurrent = jumpPressedPeriodTime;
         }
 
-        if ((IsGrounded() && rb.velocity.y <= 0 && jumpPressedPeriodCurrent > 0))
+        if (IsGrounded())
         {
-            Jump();
             currentJumpsLeft = multiJumpLimit;
+            if (rb.velocity.y <= 0 && jumpPressedPeriodCurrent > 0)
+            {
+                Jump();
+            }
         }
 
         if (!IsGrounded() && currentJumpsLeft > 0 && Input.GetKeyDown(KeyCode.W))
