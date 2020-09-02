@@ -51,18 +51,17 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/CanvasObjs.cs">
+        <entry file="file://$PROJECT_DIR$/Assets/DebugPlayer.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="25" column="82" lean-forward="true" selection-start-line="25" selection-start-column="82" selection-end-line="25" selection-end-column="82" />
+            <state relative-caret-position="768">
+              <caret line="51" column="37" lean-forward="true" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
               <folding>
-                <marker date="1599007837181" expanded="true" signature="6:78" ph="..." />
-                <marker date="1599007837181" expanded="true" signature="141:2240" ph="{...}" />
-                <marker date="1599007837181" expanded="true" signature="437:1049" ph="{...}" />
-                <marker date="1599007837181" expanded="true" signature="1068:1462" ph="{...}" />
-                <marker date="1599007837181" expanded="true" signature="1343:1456" ph="{...}" />
-                <marker date="1599007837181" expanded="true" signature="1498:1883" ph="{...}" />
-                <marker date="1599007837181" expanded="true" signature="2025:2238" ph="{...}" />
+                <marker date="1599008545421" expanded="false" signature="6:100" ph="..." />
+                <marker date="1599008545421" expanded="true" signature="141:2099" ph="{...}" />
+                <marker date="1599008545421" expanded="true" signature="466:1116" ph="{...}" />
+                <marker date="1599008545421" expanded="true" signature="1135:1321" ph="{...}" />
+                <marker date="1599008545421" expanded="true" signature="1357:1742" ph="{...}" />
+                <marker date="1599008545421" expanded="true" signature="1884:2097" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -78,8 +77,8 @@
       <find>jumpVec</find>
       <find>jumpPressedPeriod</find>
       <find>leaveGroundPos</find>
-      <find>SetSlider</find>
       <find>multi</find>
+      <find>SetSlider</find>
     </findStrings>
     <replaceStrings>
       <replace>inputDirection</replace>
@@ -94,7 +93,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/CanvasObjs.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DebugPlayer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -103,6 +102,7 @@
         <option value="$PROJECT_DIR$/Assets/PlayerController3.cs" />
         <option value="$PROJECT_DIR$/Assets/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/CanvasObjs.cs" />
+        <option value="$PROJECT_DIR$/Assets/DebugPlayer.cs" />
       </list>
     </option>
   </component>
@@ -162,12 +162,12 @@
       <updated>1598636121249</updated>
       <workItem from="1598636122719" duration="9000" />
       <workItem from="1598636133569" duration="8822000" />
-      <workItem from="1598924037426" duration="23629000" />
+      <workItem from="1598924037426" duration="24331000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32460000" />
+    <option name="totallyTimeSpent" value="33162000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -284,16 +284,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/CanvasObjs.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="25" column="82" lean-forward="true" selection-start-line="25" selection-start-column="82" selection-end-line="25" selection-end-column="82" />
+        <state relative-caret-position="624">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/DebugPlayer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="51" column="37" lean-forward="true" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
           <folding>
-            <marker date="1599007837181" expanded="true" signature="6:78" ph="..." />
-            <marker date="1599007837181" expanded="true" signature="141:2240" ph="{...}" />
-            <marker date="1599007837181" expanded="true" signature="437:1049" ph="{...}" />
-            <marker date="1599007837181" expanded="true" signature="1068:1462" ph="{...}" />
-            <marker date="1599007837181" expanded="true" signature="1343:1456" ph="{...}" />
-            <marker date="1599007837181" expanded="true" signature="1498:1883" ph="{...}" />
-            <marker date="1599007837181" expanded="true" signature="2025:2238" ph="{...}" />
+            <marker date="1599008545421" expanded="false" signature="6:100" ph="..." />
+            <marker date="1599008545421" expanded="true" signature="141:2099" ph="{...}" />
+            <marker date="1599008545421" expanded="true" signature="466:1116" ph="{...}" />
+            <marker date="1599008545421" expanded="true" signature="1135:1321" ph="{...}" />
+            <marker date="1599008545421" expanded="true" signature="1357:1742" ph="{...}" />
+            <marker date="1599008545421" expanded="true" signature="1884:2097" ph="{...}" />
           </folding>
         </state>
       </provider>

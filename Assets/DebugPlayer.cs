@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CanvasObjs : MonoBehaviour
+public class DebugPlayer: MonoBehaviour
 {
     public PlayerController my_PlayerController_script;
 
     public Text midairJumps;
     public Slider midairSlider;
     public Text jumpsLeft;
+    public Text jumpToReset;
     
     public Text jumpHeightLimit;
     public Slider jumpHeightLimitSlider;
@@ -26,20 +27,15 @@ public class CanvasObjs : MonoBehaviour
             jumpHeightLimit, "Jump height limit: " + jumpHeightLimitSlider.value);
         jumpHeightLimitSlider.onValueChanged.AddListener(delegate{ValueChangeCheck();});
         ValueChangeCheck();
+
+        jumpToReset.enabled = false;
     }
 
     void Update()
     {
-        // Reset jump limit value in text upon landing; does NOT happen in the script until player jumps from the ground.
-        if (my_PlayerController_script.currentJumpsLeft == 0 && my_PlayerController_script.multiJumpLimit > 0)
-        {
-            jumpsLeft.text = "Midair jumps left: 0, jump again to reset";
-        }
-        else
-        {
             jumpsLeft.text = "Midair jumps left: " + my_PlayerController_script.currentJumpsLeft;
-        }
-
+            jumpToReset.enabled = my_PlayerController_script.currentJumpsLeft == 0 &&
+                                  my_PlayerController_script.multiJumpLimit > 0;     
     }
 
     public void ValueChangeCheck()
